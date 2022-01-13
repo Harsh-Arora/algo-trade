@@ -13,15 +13,16 @@ app.use(cors())
 app.use(express.json())
 
 // MongoDB connection
-try {
-  mongoose.connect(
-    'mongodb+srv://harsh:harsh@123@cluster0.7qyv6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"',
-    { useNewUrlParser: true, useUnifiedTopology: true },
-    () => console.log('DB is connected')
-  )
-} catch (e) {
-  console.log('could not connect')
-}
+mongoose.connect('mongodb://localhost:27017/algoTrade',{
+    useUnifiedTopology:true,
+    useNewUrlParser:true
+})
+.then(()=>{
+    console.info('MongoDB connected successfully');
+})
+.catch((error)=>{
+    console.error('Error to connect MongoDB');
+})
 
 // Root
 app.get('/', (req, res) => {
