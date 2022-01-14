@@ -4,13 +4,16 @@ const mongoose = require('mongoose')
 const User = require('../models/user')
 const JWT = require('jsonwebtoken')
 
-router.post('/login', async (req, res) => {
+router.post('/login', (req, res) => {
   let { email, password } = req.body
 
   User.findOne({ email: email, password: password })
     .then((user) => {
+      const token = getToken(user)
+      
       console.log(user)
       console.info(`user with email : ${email} was found successfully`)
+      return res.status(200).send({ token })
     })
     .catch((error) => {
       console.error(`user with ${email} does not exist`)
