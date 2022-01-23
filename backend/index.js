@@ -13,16 +13,17 @@ app.use(cors())
 app.use(express.json())
 
 // MongoDB connection
-mongoose.connect('mongodb://localhost:27017/algoTrade',{
-    useUnifiedTopology:true,
-    useNewUrlParser:true
-})
-.then(()=>{
-    console.info('MongoDB connected successfully');
-})
-.catch((error)=>{
-    console.error('Error to connect MongoDB');
-})
+mongoose
+  .connect('mongodb://localhost:27017/algoTrade', {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+  })
+  .then(() => {
+    console.info('DB connected')
+  })
+  .catch((error) => {
+    console.error('DB connection error')
+  })
 
 // Root
 app.get('/', (req, res) => {
