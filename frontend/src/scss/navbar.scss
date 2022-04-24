@@ -1,0 +1,70 @@
+.navbar {
+  background-color: $baseColor;
+
+  .container-fluid {
+    width: 85%;
+  }
+
+  &-brand {
+    font-size: 2.5rem;
+    color: $secondaryColor;
+    font-family: overpass-bold;
+  }
+
+  &-nav {
+    li {
+      padding: 0 20px;
+      font-size: 1.25rem;
+
+      a {
+        color: $darkColor;
+
+        &::after {
+          content: '';
+          width: 0%;
+          height: 2px;
+          display: block;
+          background: $darkColor;
+        }
+
+        &:hover {
+          color: $darkColor;
+          &::after {
+            animation: grow;
+            animation-duration: 0.5s;
+            animation-fill-mode: forwards;
+          }
+        }
+      }
+
+      .btn {
+        font-size: 1.25rem;
+        padding: 5px 20px !important;
+        margin: 0;
+        color: $baseColor;
+
+        &:hover {
+          color: $baseColor;
+        }
+
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.basic-nav {
+  position: fixed;
+  width: 100%;
+}
+
+@keyframes grow {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}

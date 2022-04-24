@@ -1,0 +1,20 @@
+@import './variables.scss';
+@import './fonts.scss';
+@import './common.scss';
+@import './navbar.scss';
+@import './home.scss';
+@import './login.scss';
+@import './register.scss';
+@import './dashboard.scss';
+
+body {
+  font-family: overpass;
+  color: $darkColor;
+}
+
+.btn:focus,
+input:focus,
+.input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}

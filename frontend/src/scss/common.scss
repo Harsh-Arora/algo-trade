@@ -1,0 +1,59 @@
+.flexbox {
+  display: flex;
+
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.super-heading {
+  font-size: 5rem;
+  text-align: center;
+  color: $secondaryColor;
+  line-height: 6rem;
+}
+
+.heading {
+  font-size: 2.5rem;
+  color: $darkColor;
+  font-family: overpass-bold;
+}
+
+.btn {
+  &-theme {
+    font-size: 1.25rem;
+    border-radius: 20px;
+    padding: 10px 20px;
+    color: $baseColor;
+    transition: 0.3s;
+    font-family: overpass-semi-bold;
+
+    &-primary {
+      @extend .btn-theme;
+      background: $primaryColor;
+
+      &:hover {
+        color: $baseColor;
+        background: $secondaryColor;
+      }
+    }
+
+    &-secondary {
+      @extend .btn-theme;
+      background: $secondaryColor;
+
+      &:hover {
+        color: $baseColor;
+        background: $primaryColor;
+      }
+    }
+
+    img {
+      padding: 0 0 0 10px;
+    }
+  }
+  &-desc {
+    padding: 5px 0;
+    font-size: 1.25rem;
+  }
+}

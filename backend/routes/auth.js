@@ -10,29 +10,37 @@ router.post('/login', (req, res) => {
   User.findOne({ email: email, password: password })
     .then((user) => {
       const token = getToken(user)
-      
-      console.log(user)
-      console.info(`user with email : ${email} was found successfully`)
-      return res.status(200).send({ token })
+      return res.send({ message: 'VALID', token: token })
     })
     .catch((error) => {
       console.error(`user with ${email} does not exist`)
-      return res.status(404).send(`user with ${email} does not exist`)
+      return res.send({ message: 'INVALID' })
     })
 })
 
-router.post('/signup', (req,res)=>{
-  let { firstName, lastName, email, password, dateOfBirth, registrationDate, kotakPassword, aadharNumber, kotakAPIkey, kotakConsumerSecret, kotakConsumerKey, mobileNumber} = req.body
-  let user = new User({
-    firstName,
-    lastName,
+router.post('/register', (req, res) => {
+  let {
+    name,
     email,
     password,
-    dateOfBirth,
-    registrationDate,
+    kotakPassword,
+    kotakAccessToken,
+    aadharNumber,
+    kotakConsumerSecret,
+    kotakConsumerKey,
+    mobileNumber,
+    kotakUsername,
+  } = req.body
+
+  let user = new User({
+    name,
+    email,
+    password,
+    // registrationDate,
     kotakPassword,
     aadharNumber,
-    kotakAPIkey,
+    kotakAccessToken,
+    kotakUsername,
     kotakConsumerSecret,
     kotakConsumerKey,
     mobileNumber,
@@ -41,12 +49,12 @@ router.post('/signup', (req,res)=>{
     .save()
     .then(() => {
       const token = getToken(user)
-      return res.status(200).send({ user, token })
+      return res.send({ message: 'VALID', token: token })
     })
     .catch((error) => {
       console.error(error)
-      return res.status(500).send('Error')
-    })  
+      return res.send({ message: 'INVALID' })
+    })
 })
 
 const getToken = (user) => {
@@ -56,7 +64,7 @@ const getToken = (user) => {
     },
     'algoTradeToken',
     {
-      expiresIn: '10h',
+      expiresIn: '24h',
     }
   )
 }

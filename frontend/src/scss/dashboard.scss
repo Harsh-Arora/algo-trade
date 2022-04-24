@@ -1,0 +1,14 @@
+.dashboard {
+  .wrapper {
+    border: 1pt solid red;
+    height: 100vh;
+    padding: 100px 20px 20px;
+
+    .screen {
+      background: $darkColor;
+      color: $baseColor;
+      height: 100%;
+      padding: 20px;
+    }
+  }
+}
