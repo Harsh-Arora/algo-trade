@@ -5,34 +5,37 @@ const Logs = require('../models/log')
 const { PythonShell } = require('python-shell')
 
 router.get('/runPython', (req, res) => {
-  User.find().then((users) => {
-    users.map((user, key) => {
-      let options = {
-        args: [user.name, user.email],
-      }
 
-      PythonShell.run('./scripts/script.py', options, (err, result) => {
-        if (err) throw err
-        console.log(result)
+  const users = [
+    {name: "Akash", email: "ars.150697@gmail.com"},
+    {name: "Akash Raj", email: "akashraj@google.com"}
+  ];
 
-        let date = new Date()
-        let entry = result[0]
-        let email = user.email
+  const promises = [];
 
-        let log = new Logs({
-          email,
-          date,
-          entry,
-        })
+  const resolveFunction = function (val) {
+    return val;
+  }
 
-        log.save().then(() => {
-          console.log('entry saved!')
-        })
+  users.map((user, key) => {
+    let options = {
+      args: [user.name, user.email],
+    }
 
-        // res.send(result)
-      })
-    })
-  })
+    const p = new Promise(function(resolve, _) {
+      resolve("\nProcessing complete for User " + options.args);
+    });
+
+    p.then(resolveFunction);
+
+    promises.push(p);
+
+  });
+
+  Promise.all(promises).then((values) => {
+    values.forEach(val => res.write(val));
+    res.end();
+  });
 })
 
 module.exports = router
